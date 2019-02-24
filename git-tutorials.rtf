@@ -1,0 +1,194 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fmodern Lucida Console;}{\f2\fmodern\fcharset0 Lucida Console;}}
+{\*\generator Riched20 10.0.17134}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 Git Commands : \par
+Git is a distributed version-control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files. Its goals include speed, data integrity, and support for distributed, non-linear workflows.\par
+\par
+Frequently used gitcommands : \par
+1. git config\par
+Used to set basic configuration for the git\par
+> git config --global user.name "name"\par
+ > git config --global user.email "mail-address"\par
+> \f1\fs18 git config --get user.name\par
+\f2\lang1033 > \f1 git config --global --edit\par
+\f2\tab Edit value in git Editor\par
+> \f1  git config --global --add user.username  MaheshGO\f2\lang9\par
+\par
+\lang1033\tab\f1\lang9  Action\par
+    --get                 get value: name [value-regex]\par
+    --get-all             get all values: key [value-regex]\par
+    --get-regexp          get values for regexp: name-regex [value-regex]\par
+    --get-urlmatch        get value specific for the URL: section[.var] URL\par
+    --replace-all         replace all matching variables: name value [value_regex]\par
+    --add                 add a new variable: name value\par
+    --unset               remove a variable: name [value-regex]\par
+    --unset-all           remove all matches: name [value-regex]\par
+    --rename-section      rename section: old-name new-name\par
+    --remove-section      remove a section: name\par
+    -l, --list            list all\par
+    -e, --edit            open an editor\par
+    --get-color           find the color configured: slot [default]\par
+    --get-colorbool       find the color setting: slot [stdout-is-tty]\par
+\f2\lang1033 2. git init <repo-name>\par
+\tab Used to create new repository in Local\par
+3. git clone <git-url-shh-or-http>\par
+ \tab Used to clone existing Projct code into Local System\par
+4. git add <Files>\par
+\tab Used to adds files into staging area.\par
+\tab > git add . -> used to add all files in current directory to the staging area\par
+\tab > git add * -> used to add one or more to the staging area\par
+\tab > git add info.txt\par
+\tab >>> Single command for git add All, commit and push , then use\par
+ \tab > git commit -am "your message" && git push \par
+5. git commit -m <message>\par
+\tab Used to records or snapshots the file permanently in the version history\par
+\tab > git commit -a\par
+\tab\tab This command commits any files you\rquote ve added with the git add command and also commits any files you\rquote ve changed since then.\par
+6. git diff\par
+\tab Used to shows the file differences which are not yet staged.\par
+\tab >>> To See Staged files commend use\par
+\tab > git diff \f1\endash staged\par
+\f2\tab >>> Too see the differences between the thwo branches use \par
+\tab > git diff [first branch] [second branch]  \par
+7. git reset\par
+\tab Used to unstage the staged files\par
+\tab > git reset <file>\par
+\tab\tab unstage only one file\par
+\tab > git reset <commit>\par
+\tab\tab undoes all the commits after the specified commit and preserves the changes locally.\par
+\tab > git reset \f1\endash\f2 -\f1 hard \f2 <\f1 commit\f2 >\par
+\tab\tab Discards all history and goes back to the specified commit\par
+\tab > git reset \f1\endash\f2 -soft\f1  \f2 <\f1 commit\f2 >\par
+\tab\tab Commits after the specified commit, Changes will be in staging area.\par
+\par
+Note : <Commit> means commit ID\par
+8. git status\par
+\tab Used to displays paths that have differences between the index file and the current HEAD commit.\par
+\tab Options Mostly Used : \par
+\tab > -s or --short -> Give the output in the short-format\par
+\tab > -b or --branch -> Show the branch and tracking info even in short-format.\par
+\tab > --show-stash -> Show the number of entries currently stashed away.\par
+\tab > --long -> Give the output in the long-format. This is the default.\par
+\tab > -v or --verbose -> In addition to the names of files that have been changed, also show the textual changes that are staged to be committed (i.e., like the output of git diff --cached). If -v is specified twice, then also show the changes in the working tree that have not yet been staged (i.e., like the output of git diff).\par
+9. -u[<mode>] or --untracked-files[=<mode>]\par
+\tab > Show untracked files.\par
+Note : The mode parameter is used to specify the handling of untracked files. It is optional: it defaults to all, and if specified, it must be stuck to the option (e.g. -uno, but not -u no).\par
+Modes :\par
+1.no - Show no untracked files.\par
+2.normal - Shows untracked files and directories.\par
+3.all - Also shows individual files in untracked directories.\par
+10. git rm - not verified\par
+\tab > Used to deletes the file from your working directory and stages the deletion\par
+\tab > git clean -df -> Remove all untracked directories and files. thats why it will be df.\par
+11. git log\par
+\tab used to list the version history for the current branch\par
+\tab >>> To see the version history of specific file the use\par
+\tab > git log \f1\endash follow\f2  <\f1 file\f2 >\par
+\tab > git reflog -> show comitts in the order of last commits.\par
+12. git show \par
+\tab Used to shows the metadata and content changes of the specified commit.\par
+\tab > git show <commit>\par
+13. git branch \par
+\tab Used to lists all the local branches in the current repository.\par
+\tab >>> To create a new branch then use\par
+\tab > git branch <branch-name>\par
+\tab >>> To delete a existing branch, then use\par
+\tab > git branch -d <branch-name>\par
+\tab >>> To set default origin for git pull and push use, \par
+\tab > \f1 git branch --set-upstream-to=<remote>/<branch> \f2  \par
+\tab OR\par
+\tab > \f1  git branch -u =<remote>/<branch> \f2  \par
+14. git checkout\par
+\tab Used to switch from one branch to another\par
+\tab > git checkout <branch-name>\par
+\tab >>> To create new branch from current working directory and move to it then use \par
+\tab > git checkout -b <new=branch-name>\par
+15. git merge\par
+\tab Used to merges the specified branch\rquote s history into the current branch\par
+\tab > git merge <branch-name>\par
+16. git remote\par
+\tab Used to connect your local repository to the remote server.\par
+\tab > git remote add <variable-name> <Remote-Server-Link>\par
+\tab OR\par
+\tab > \f1 git remote add origin \f2 <URL>\par
+\tab >>> To List out all remote git repo's then use\par
+\tab > \f1 git remote -v\par
+\f2\tab >>> To set one of remote to be an origin then use\par
+\tab > git remote set-url origin git@github.com:USERNAME/REPOSITORY.git\par
+\tab OR\par
+\tab > git remote set-url origin <remote-name>\par
+17. git push\par
+\tab Used to sends the committed changes into specified repository branch\par
+\tab > git push <saved-remote-variable-name> <Branch-name> \par
+\tab >>> To push current chnages to all the branches in specified repo use \par
+\tab > git push --all <saved-remote-variable-name>\par
+\tab >>> Delete Branch on remote repository  - To delete a remote branch, we do not use the "git branch" command - but instead "git push" with the "--delete" flag:\par
+\tab > git push origin --delete feature/login\par
+\tab OR\par
+\tab > git push [variable name] :[branch name]\par
+18. git pull\par
+\tab Used to fetches and merges changes on the remote server to your working directory.\par
+\par
+19. git stash\par
+\tab > git stash save - temporarily stores all the modified tracked files\par
+\tab > git stash pop - restores the most recently stashed files\par
+\tab > git stash list - lists all stashed changesets\par
+\tab > git stash drop - discards the most recently stashed changeset\par
+\par
+Not confirmed Commands :\par
+20. git checkout <file>\par
+if the file content is changed, then want to be revert with git index use above command\par
+21. To Rename the commit message :\par
+If the commit only exists in your local repository and has not been pushed to GitHub, you can amend the commit message with the git commit --amend command.\par
+\tab > git commit --amend -m "New Commit Message"\par
+It won't do any more commit it just modify last commit message. But i will change Last committed hash to new one. It because of commit message is also part of commit. When the hash changes it will change git history. \par
+Note : If you changed git history, then it will affect other person git working tree. So Becareful here.\par
+\tab > git commit --amend\par
+\tab >>>It also used to commit file with out a new commit, file will be committed by its last commit.\par
+If you have already pushed the commit to GitHub, you will have to force push a commit with an amended message.\par
+\tab >  git commit --amend -m "New Commit Message"\par
+\tab > git push --force <branch>\par
+\tab Note : push --force command to force push over the old commit.\par
+\tab Note : If you need to amend the message for multiple commits or an older commit, you can use interactive rebase, then force push to change the commit history.\par
+\par
+22. Recovering from a commit to wrong branch. \par
+git branch\par
+\tab master\tab\par
+\tab ref-branch\par
+Accidentally commited to master.\par
+Goals : \par
+Master branch back it original (Before commit state).\par
+Commit should be in ref-branch\par
+Solution : git cherry-pick <commit>\par
+it will create new commit from it original commit Id. And it won't delete original commit from branch.\par
+Steps:\par
+Master :\par
+\tab > git log -> get commit ID\par
+\tab > git checkout ref-branch\par
+\tab > git log - to verify commits\par
+\tab > git cherry-pick <commit>\par
+\tab > git checkout master\par
+\tab > git reset --hard <commit>\par
+\tab > git clean -df\par
+if you wants to last committed changes in master branch. That we are reset then use.\par
+\tab > git reflog -> get commit ID that we want.\par
+\tab > git checkout <copied-commit-id>\par
+\tab\par
+Problems : If we want to go back to old changes from new changes, But the new chnages already pulled by other peoples. Now we have to use git revert. It will create new commit on top those commit. the new commit completely undo all those chnages.\par
+\tab > git revert <commit-hash>\par
+\tab > git log -> check chnages. \par
+\tab  \par
+\par
+\tab\par
+  \par
+\par
+\par
+\par
+\tab\par
+\par
+\par
+\f1\lang9\par
+\par
+\f0\fs22\par
+\par
+}
+ 
