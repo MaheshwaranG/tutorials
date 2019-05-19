@@ -74,7 +74,8 @@ Modes :
 1.no - Show no untracked files.
 2.normal - Shows untracked files and directories.
 3.all - Also shows individual files in untracked directories.
-10. git rm - not verified
+10. git rm - Command
+	> git rm --cached <filename> - used to remove cached file name from git.
 	> Used to deletes the file from your working directory and stages the deletion
 	> git clean -df -> Remove all untracked directories and files. thats why it will be df.
 11. git log
