@@ -40,11 +40,13 @@ Used to set basic configuration for the git
 5. git commit -m <message>
 	Used to records or snapshots the file permanently in the version history
 	> git commit -a
-		This command commits any files you’ve added with the git add command and also commits any files you’ve changed since then.
+		This command commits any files you have added with the git add command and also commits any files youï¿½ve changed since then.
 6. git diff
 	Used to shows the file differences which are not yet staged.
 	>>> To See Staged files commend use
-	> git diff –staged
+	> git diff -staged
+	OR
+	>git diff --cached
 	>>> Too see the differences between the thwo branches use 
 	> git diff [first branch] [second branch]  
 7. git reset
@@ -53,9 +55,9 @@ Used to set basic configuration for the git
 		unstage only one file
 	> git reset <commit>
 		undoes all the commits after the specified commit and preserves the changes locally.
-	> git reset –-hard <commit>
+	> git reset --hard <commit>
 		Discards all history and goes back to the specified commit
-	> git reset –-soft <commit>
+	> git reset --soft <commit>
 		Commits after the specified commit, Changes will be in staging area.
 
 Note : <Commit> means commit ID
@@ -81,7 +83,7 @@ Modes :
 11. git log
 	used to list the version history for the current branch
 	>>> To see the version history of specific file the use
-	> git log –follow <file>
+	> git log ï¿½follow <file>
 	> git reflog -> show comitts in the order of last commits.
 12. git show 
 	Used to shows the metadata and content changes of the specified commit.
@@ -102,7 +104,7 @@ Modes :
 	>>> To create new branch from current working directory and move to it then use 
 	> git checkout -b <new=branch-name>
 15. git merge
-	Used to merges the specified branch’s history into the current branch
+	Used to merges the specified branchï¿½s history into the current branch
 	> git merge <branch-name>
 16. git remote
 	Used to connect your local repository to the remote server.
@@ -175,6 +177,10 @@ if you wants to last committed changes in master branch. That we are reset then 
 Problems : If we want to go back to old changes from new changes, But the new chnages already pulled by other peoples. Now we have to use git revert. It will create new commit on top those commit. the new commit completely undo all those chnages.
 	> git revert <commit-hash>
 	> git log -> check chnages. 
+
+
+
+Ref: https://www.digitalocean.com/community/cheatsheets/how-to-use-git-a-reference-guide
 	 
 
 	
