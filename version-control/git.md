@@ -1,7 +1,12 @@
-##Git Commands :
+# Git Commands :
+
 Git is a distributed version-control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files. Its goals include speed, data integrity, and support for distributed, non-linear workflows.
 
-**\*Frequently used gitcommands :**
+###### git --version
+
+above commend ensure that git client installed in your system or not.
+
+**Frequently used gitcommands :**
 
 1.  git config
     Used to set basic configuration for the git
@@ -88,16 +93,26 @@ Note : <Commit> means unique commit ID
 **Options Mostly Used :**
 
 > -s or --short -> Give the output in the short-format
+
 > -b or --branch -> Show the branch and tracking info even in short-format.
+
 > --show-stash -> Show the number of entries currently stashed away.
+
 > --long -> Give the output in the long-format. This is the default.
+
 > -v or --verbose -> In addition to the names of files that have been changed, also show the textual changes that are staged to be committed (i.e., like the output of git diff --cached).
 > If -v is specified twice, then also show the changes in the working tree that have not yet been staged (i.e., like the output of git diff).
+
 > `-u[<mode>] or --untracked-files[=<mode>] >` Show untracked files.
+
 > Note : The mode parameter is used to specify the handling of untracked files. It is optional: it defaults to all, and if specified, it must be stuck to the option (e.g. -uno, but not -u no).
+
 > Modes :
+
 > 1.no - Show no untracked files.
+
 > 2.normal - Shows untracked files and directories.
+
 > 3.all - Also shows individual files in untracked directories.
 
 9. `git clean`
@@ -186,7 +201,7 @@ Not confirmed Commands :
 
 ---
 
-#Simple Git Todo's Task
+# Simple Git Todo's Task
 
 - **To Rename the commit message :**
 
@@ -212,17 +227,22 @@ Not confirmed Commands :
 
   > Accidentally commited to master.
 
-  ###Goals :
+  ### Goals :
+
   Master branch back it original (Before commit state).
   Commit should be in ref-branch
 
-  ##Solution : `git cherry-pick <commit>`
+  ## Solution : `git cherry-pick <commit>`
+
   it will create new commit from it original commit Id. And it won't delete original commit from branch.
 
-  ###Steps:
+  ### Steps:
+
   Master : > git log -> get commit ID > git checkout ref-branch > git log - to verify commits > `git cherry-pick <commit>` > git checkout master > `git reset --hard <commit>` > git clean -df
   if you wants to last committed changes in master branch. That we are reset then use. > git reflog -> get commit ID that we want. > `git checkout <copied-commit-id>`
 
-Problems : If we want to go back to old changes from new changes, But the new chnages already pulled by other peoples. Now we have to use git revert. It will create new commit on top those commit. the new commit completely undo all those chnages. > `git revert <commit-hash>` > git log -> check changes.
+  > Problems : If we want to go back to old changes from new changes, But the new chnages already pulled by other peoples. Now we have to use git revert. It will create new commit on top those commit. the new commit completely undo all those chnages. > `git revert <commit-hash>` > git log -> check changes.
 
-Ref: [git quick reference](https://www.digitalocean.com/community/cheatsheets/how-to-use-git-a-reference-guide)
+Reference: [git quick reference](https://www.digitalocean.com/community/cheatsheets/how-to-use-git-a-reference-guide)
+
+# git --help

@@ -1,4 +1,4 @@
-// Boilerplate: connect to DB
+```// Boilerplate: connect to DB
 const { MongoClient } = require('mongodb');
 const uri = 'mongodb://localhost:27017,localhost:27018,localhost:27019/txn';
 const client = await MongoClient.connect(uri, { useNewUrlParser: true, replicaSet: 'rs' });
@@ -50,3 +50,4 @@ async function transfer(from, to, amount) {
     throw error; // Rethrow so calling function sees error
   }
 }
+```
