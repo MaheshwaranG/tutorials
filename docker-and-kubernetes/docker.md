@@ -56,9 +56,9 @@ A computer on which a hypervisor runs one or more virtual machines is called a h
 
 ## What is VMs simplly
 
-     A virtual machine (VM) is an emulation of a computer system on an one computer. However VM, can take up a lot of system resources. Each VM runs not just a full copy of an operating system, but a virtual copy of all the hardware that the operating system needs to run. This quickly adds up to a lot of RAM and CPU cycles. Thats still economical compared to running separate actual computers, but for some applications it can be overkill, which led to the development of containers. Here the problem came, then container cames into running.
+A virtual machine (VM) is an emulation of a computer system on an one computer. However VM, can take up a lot of system resources. Each VM runs not just a full copy of an operating system, but a virtual copy of all the hardware that the operating system needs to run. This quickly adds up to a lot of RAM and CPU cycles. Thats still economical compared to running separate actual computers, but for some applications it can be overkill, which led to the development of containers. Here the problem came, then container cames into running.
 
-    	~~Note : Due to this we can't said, VM (hpervisor) is out of market. Each of this can have advandage and disadvandage.~~
+~~Note : Due to this we can't said, VM (hpervisor) is out of market. Each of this can have advandage and disadvandage.~~
 
 **Benefits of VMs:**
 All OS resources available to apps
@@ -153,65 +153,203 @@ You can confirm, Docker is installed or not by running below command,
   > docker create
 
 - Creating and running a container from Image
-  > docker run <image_name>
+  > `docker run <image_name>`
 
-Ex:
-docker run busybox
+**Ex:**
+
+> docker run busybox
+
 First docker look at current system cache with named busybox, if it not available in local then it will look at docker hub.
 if image available there then first download that image locally and then start that image to create containners.
 
-Overriding Defaul Commands:
-docker run busybox echo hi there
-docker run busybox ls
-docker run busybox sh
-docker run busybox ping google.com
+**Overriding Defaul Commands:**
+
+> docker run busybox echo hi there
+> docker run busybox ls
+> docker run busybox sh
+> docker run busybox ping google.com
+
 if user use any commands, then it should be available in that containner. >> docker run busybox ls
 because that ls commands does not known by that container.
 
-Listing All running Containers: >> docker ps
+**Listing All running Containers: `docker ps`**
+
 All container cache in current system,
 including stopped containner, running containner list. >> docker ps --all
 
-Container Life cycle : 1. Create a container >> docker create <image_name> 2. Start a container
+**Container Life cycle :**
 
-> > docker start <container_id_from_create>
-> > Return id ofthe container >> docker start -a <image>
-> > To watch a output coming from container, and print out
-> > docker run = docker create + docker start
+1. Create a container
 
-Stop a Container : >> docker stop <container_id>
-It will generate SIGNAL TERM to primary process to stop a containner, then container will take some time
-to clean up process. After all process container will be stoped. So it is immediate stop command.
+- From existing Image
+  > `docker create <image_name>`
+- From Docker file
+
+  > `docker build -t <tag_name> -f <dockerfile>`
+
+  Creating Custome Docker Image (Custome light OS):
+
+Process :
+
+- `Dockerfile >> Docker client >> Docker server >> Usable Image`
+- `Base Docker Image >> Download additional dependency >> specify command to run on containner`
+
+2. Start a container
+   > `docker start <container_id_from_create>`
+
+Returns id of the container
+
+> `docker start -a <image>`
+> -a -> To watch a output coming from container, and print out
+
+> `docker run is more or less = docker create + docker start`
+
+3. **Stop a Container :**
+
+> `docker stop <container_id>`
+
+It will generate SIGNAL TERM to primary process to stop a containner, then container will take some time to clean up process. After all process container will be stoped. So it is immediate stop command.
 If process does not stop with in some period of time (probably 10s), then it will be automatically kill by process.
-Kill a Container : >> docker kill <container_id>
-It is a immediate process to stop a containner. It does not care about state / process / cleaing up.
-It will generate KILL SIGNAL to primary process to immediately stop a containner.
 
-Restaring Stopped Containner :
-First get id of stopped containner.
+4. **Kill a Container :**
+
+> `docker kill <container_id>`
+
+- It is a immediate process to stop a containner. It does not care about state of process, just cleaing up.
+  It will generate KILL SIGNAL to primary process to immediately stop a containner.
+
+5. **Restaring Stopped Containner :**
+
+- First get id of stopped containner.
+
 Once the container created then restaring container user can't do any changes on container, only thing is
 last stopped container can start (like default container override)
 
-    >> docker start -a <container_id>
+> `docker start -a <container_id>`
 
-Remove stopped container (or) clearing docker cache : >> docker system prune
+6. **Remove stopped container (or) clearing docker cache :**
 
-Retrieving log output from a container : >> docker logs <container_id>
+> docker system prune
+> `docker rm <id-name>` > `docker rmi <id-name>`
 
-Multi Command Containners & Executing Commands in Running Containers :
-To Executing an additional command in a container >> docker exec -it <container_id> <commands>
--it flag -> interactive shell / input to containner (if -it is not included then user can't give input) 1. STDIN 2. STDOUT 3. STDERR >> docker exec -i -t <container_id> <commands> >> docker exec -i <container_id> <commands>
--i input STDIN
--t show up it result in Shell
+7. **Retrieving log output from a container :**
 
-Sample :
-Open in First CMD/Shell >> docker run redis
-Open another CMD/Shell Type below command: >> docker exec -it <containner_id> redis-cli
+> `docker logs <container_id>`
 
-# Open shell from container: >> docker run -i -t busybox sh >> docker exec -it <c-id> sh
+8. **List runing container**
 
-Creating Custome Docker Image (Custome light OS):
-Process :
-Dockerfile >> Docker client >> Docker server >> Usable Image
-Base Docker Image >> Download additional dependency >> specify command to run on containner
-Goal Docker Redis Image : >> mkdir docker-redis-image >>
+> `docker ps` > `docker ps -a` -> list out all container (running and stopped)
+
+9. **Docker - communication with other container (Networking)**
+
+   - Docker uses networking feature to communicate with each other
+
+   1. Early docker use `link` option to connect one or more container. Now `--link` has been deprecated.
+
+      - Link shares evn variables
+      - Docker exposes connectivity information for the source container to the recipient container in two ways:
+
+        - Environment variables,
+        - Updating the /etc/hosts file
+
+      - Example
+
+        > `docker run -d --name db training/postgres` > `docker run -d -P --name web --link db:database training/webapp python app.py`
+
+      - Usage
+        - `--link <name or id>:alias`
+        - `--link <name or id>`
+          > Here `db` does not expose any port to outside. But `web` can access db by creating secure tunnel.
+
+   2. Networking [types](https://docs.docker.com/network/) in Docker
+
+      - bridge
+      - host
+      - overlay
+      - macvlan
+      - none
+      - networking plugin
+
+      ***
+
+      > `docker network --help` > `docker network ls`
+
+      ***
+
+      - Host Network
+
+        > Containers directly binds to the docker host machine. There is no need to map host port to container port. Even though network exposed to by host, all other such as storage, process namespace, user namespace are isolated from host ( inside of container).
+
+        - Example
+          > docker run --rm -d --network host --name my_nginx nginx
+          > visit `localhost:80` nginx will be loaded
+          > check by `sudo netstat -tulpn | grep 80`
+
+      - Bridge Network
+
+        - `default bridge network` (automatically created by docker by default)
+        - `user-defined bridge network`
+
+      - Overlay Network
+
+        - default overlay network
+        - user-defined overlay network
+        - overlay network for stand-alone containers
+        - communicate between a container and a swarm service
+
+        > both are used to connect the containers running on the same docker host. [Learn here](https://docs.docker.com/network/network-tutorial-standalone/)
+
+      - macvlan Network (this networks only on Linux)
+
+        - Macvlan network allows you to assign a MAC address to a container, make it appear as a physical device on your network.
+        - Docker deamon routes traffic to containers by their MAC address.
+        - Macvlan used to on legacy application that expect to be directly connected to the physical network, rather than routed through the Docker host's network stack. this strategy
+        - in this type of network, the docker host accept requests for multiple MAC address at its IP address and routes those request to the appropriate containers.
+
+      - none
+
+        - disable all networking
+        - none is not available for docker swarm services.
+        - usually used with custom network driver
+        -
+
+      - network plugin
+        - thrid party network plugin with docker.
+
+10. **Persistent storage in Containers (--volume, --mount)**
+
+We all know that container are separate process run on top of Docker like Light weight weight OS with in its own file system. it has been initialize on startup and dropped on removing containers.
+
+But in some cases like Database we need persistent storage, that means even of removal of container we need maintain data. For that docker has been implemented volume.
+
+It just a reference of host directory inside container. Container sync with that directory.
+
+> `docker volume create <name>` > `docker volume inspect <name>`
+
+> `docker run -d --name proxy -v ./config:/app nginx:latest`
+
+## Multi Command Containners & Executing Commands in Running Containers :
+
+To Executing an additional command in a running container
+
+> `docker exec -it <container_id> <commands>`
+> -it flag -> interactive shell / input to containner (if -it is not included then user can't give input)
+
+1.  STDIN
+2.  STDOUT
+3.  STDERR
+
+> `docker exec -i <container_id> <commands>`
+> -i input STDIN
+> -t show up it result in Shell
+
+**Sample :**
+
+1. Open in First CMD/Shell
+   > docker run redis
+2. Open another CMD/Shell Type below command:
+   > `docker exec -it <containner_id> redis-cli`
+
+**Open shell from container:**
+
+> `docker run -i -t busybox sh` > `docker exec -it <c-id> sh`
