@@ -48,6 +48,34 @@ fun1(a);
 console.log(a);
 ```
 
+Finally check this:
+```var a = 10;
+
+function fun1(val) {
+  val = 20;
+}
+
+fun1(a);
+console.log("Passing a : " + a);
+
+var b = { num: 10 };
+function fun2(val) {
+  val.num = 20;
+}
+
+fun2(b);
+console.log("passing b:" + JSON.stringify(b));
+
+function fun3(val) {
+  val.num = 50;
+  val = {};
+  val.x = 222;
+}
+
+fun3(b);
+console.log("passing b 2 :" + JSON.stringify(b));
+```
+
 # Questions on Scoping and Hosting
 
 1. what is the output of below program?
